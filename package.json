@@ -1,14 +1,9 @@
 {
-  "engines": {
-    "node": "22.12.0"
-  },
   "name": "majorproject",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "install": "npm install --legacy-peer-deps"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Imran Ali",
