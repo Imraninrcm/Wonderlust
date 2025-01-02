@@ -1,19 +1,16 @@
 {
   "name": "majorproject",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "build": "npm install --legacy-peer-deps && next build"
-  },
-  "engines": {
-    "node": "18.x"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Imran Ali",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "cloudinary": "^1.41.3",
+    "cloudinary": "^2.5.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.1.0",
     "dotenv": "^16.4.7",
