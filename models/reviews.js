@@ -3,7 +3,10 @@ const User = require("./user");
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-  comment: String,
+  comment: {
+    type: String,
+    enum: ["bad", "good", "excellent"],
+  },
   rating: {
     type: Number,
     min: 1,
