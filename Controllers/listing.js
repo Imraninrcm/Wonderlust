@@ -52,7 +52,7 @@ module.exports.editListing = async (req, res) => {
 
 module.exports.deleteListing = async (req, res) => {
   if (!req.isAuthenticated()) {
-    req.flash("error", "You must be signed in to create new Listings");
+    req.flash("error", "You must be signed in to delete your listing");
     return res.redirect("/login");
   }
   let { id } = req.params;
