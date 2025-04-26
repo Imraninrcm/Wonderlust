@@ -75,12 +75,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// // Home route
-// app.get("/", (req, res) => {
-//   res.send(
-//     `Hi, I am root <br> <a href="/listings">All Listings</a> <br><a href="/signup">SignUp</a> <br><a href="/login">SignIn</a>`
-//   );
-// });
+// Home route
+app.get("/", (req, res) => {
+  res.send(
+    `Hi, I am root <br> <a href="/listings">All Listings</a> <br><a href="/signup">SignUp</a> <br><a href="/login">SignIn</a>`
+  );
+});
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewRouter);
