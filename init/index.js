@@ -1,9 +1,11 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 
 const listing = require("../models/listing.js");
 
-const mongoUrl = "mongodb://127.0.0.1:27017/wonderlust";
+const mongoUrl = process.env.ATLUSURL;
 async function main() {
   await mongoose.connect(mongoUrl);
 }
