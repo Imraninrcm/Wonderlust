@@ -113,3 +113,12 @@ textarea {
   display: flex !important;
   align-items: center !important;
 }
+
+.reviewCard {
+  padding: 10px;
+}
+
+.delRV {
+  border: none;
+  background-color: transparent;
+}

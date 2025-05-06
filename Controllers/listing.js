@@ -1,5 +1,5 @@
 const Listing = require("../models/listing");
-
+const { formatDate } = require("../middleware");
 module.exports.index = async (req, res) => {
   const listings = await Listing.find({});
   res.render("listings/index.ejs", {
@@ -17,6 +17,10 @@ module.exports.showListing = async (req, res) => {
   const list = await Listing.findById(id)
     .populate({ path: "reviews", populate: { path: "author" } })
     .populate("owner");
+  list.reviews = list.reviews.map((review) => {
+    review.formattedCreatedAt = formatDate(review.createdAt); // Or formatDate(review.createdAt, "DD MMM YYYY") for "25 Mar 2015"
+    return review;
+  });
   if (!list) {
     req.flash("error", "Listing you requested for does not exist!");
     res.redirect("/listings");

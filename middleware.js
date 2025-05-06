@@ -80,6 +80,30 @@ let isReviewAuthor = async (req, res, next) => {
   next();
 };
 
+const formatDate = (date, formatStyle = "MM DD YYYY") => {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  if (formatStyle === "DD MMM YYYY") {
+    return `${day} ${month} ${year}`;
+  } else {
+    return `${month} ${day} ${year}`;
+  }
+};
 module.exports = {
   IsloggedIn,
   saveRedirectUrl,
@@ -87,4 +111,5 @@ module.exports = {
   validateListing,
   validateReview,
   isReviewAuthor,
+  formatDate,
 };

@@ -124,26 +124,30 @@
   <div class="row">
     <p><b>All Reviews:</b></p>
     <% for(rv of list.reviews){ %>
-    <div class="card col-5 ms-3 mb-3">
+    <div class="card reviewCard col-3 ms-3 mb-3">
       <div class="card-body">
-        <h5 class="card-title">@<%= rv.author.username %></h5>
-        <p class="starability-result" data-rating="<%= rv.rating%>"></p>
-        <p class="card-text"><%= rv.comment%></p>
-        <div class="card-footer text-body-secondary">
-          <small class="text-body-secondary"
-            >Added On <%= rv.createdAt.toLocaleDateString("en-IN") %></small
+        <h5 class="card-title d-flex justify-content-between">
+          <span>@<%= rv.author.username %></span
+          ><span
+            ><% if(currUser && currUser._id.equals(rv.author._id)){ %>
+            <form
+              class="mb-3"
+              action="/listings/<%= list._id %>/reviews/<%= rv._id %>?_method=DELETE"
+              method="post"
+            >
+              <button type="submit" class="delRV">
+                <i class="fa-regular fa-trash-can" style="color: #ff0000"></i>
+              </button>
+            </form>
+            <% } %></span
           >
-        </div>
+        </h5>
+        <p class="starability-result" data-rating="<%= rv.rating%>"></p>
+        <p class="card-text d-flex justify-content-between">
+          <span style="font-size: large"><%= rv.comment%></span>
+          <span class="text-body-tertiary"> <%= rv.formattedCreatedAt%></span>
+        </p>
       </div>
-      <% if(currUser && currUser._id.equals(rv.author._id)){ %>
-      <form
-        class="mb-3"
-        action="/listings/<%= list._id %>/reviews/<%= rv._id %>?_method=DELETE"
-        method="post"
-      >
-        <button type="submit" class="btn btn-sm btn-dark">Delete</button>
-      </form>
-      <% } %>
     </div>
     <% } %>
   </div>

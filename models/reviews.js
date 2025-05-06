@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const reviewSchema = new Schema({
   comment: {
     type: String,
-    enum: ["bad", "good", "excellent"],
   },
   rating: {
     type: Number,
