@@ -17,15 +17,12 @@ module.exports.showListing = async (req, res) => {
   const list = await Listing.findById(id)
     .populate({ path: "reviews", populate: { path: "author" } })
     .populate("owner");
-  list.reviews = list.reviews.map((review) => {
-    review.formattedCreatedAt = formatDate(review.createdAt); // Or formatDate(review.createdAt, "DD MMM YYYY") for "25 Mar 2015"
-    return review;
-  });
+
   if (!list) {
     req.flash("error", "Listing you requested for does not exist!");
     res.redirect("/listings");
   }
-  res.render("listings/show.ejs", { list });
+  res.render("listings/show.ejs", { list, formatDate });
 };
 
 module.exports.AddListing = async (req, res) => {

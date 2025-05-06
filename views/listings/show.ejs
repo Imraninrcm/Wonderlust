@@ -4,20 +4,32 @@
   <div class="row mt-3">
     <div class="col-8 offset-2">
       <div class="col"><h3><%= list.title %></h3></div>
-      <div class="card col- offset-1" style="padding-left: 0; padding-right: 0">
+      <div class="card">
         <img
           src="<%= list.image.url %>"
           class="card-img-top show-img"
           alt="listing-image"
         />
         <div class="card-body">
-          <p class="card-text">Owned by <i><%= list.owner.username %></i></p>
+          <p class="card-text" style="color: #9322ea">
+            Owned by <i>@<%= list.owner.username %></i>
+          </p>
           <p class="card-text"><b>Description:</b> <%= list.description %></p>
           <p class="card-text">
             <b>Price:</b> &#8377;<%= list.price.toLocaleString("en-IN") %>
           </p>
           <p class="card-text"><b>City:</b><%= list.location %></p>
           <p class="card-text"><b>Country:</b><%= list.country %></p>
+        </div>
+        <div
+          class="card-footer text-body-secondary d-flex justify-content-between"
+        >
+          <span style="color: #00e5ff"
+            >Created At: <b><%= formatDate(list.createdAt) %></b></span
+          >
+          <span style="color: #a200ff"
+            >Last Update: <b><%= formatDate(list.updatedAt) %></b></span
+          >
         </div>
       </div>
     </div>
@@ -145,7 +157,9 @@
         <p class="starability-result" data-rating="<%= rv.rating%>"></p>
         <p class="card-text d-flex justify-content-between">
           <span style="font-size: large"><%= rv.comment%></span>
-          <span class="text-body-tertiary"> <%= rv.formattedCreatedAt%></span>
+          <span class="text-body-tertiary">
+            <%= formatDate(rv.createdAt)%></span
+          >
         </p>
       </div>
     </div>
