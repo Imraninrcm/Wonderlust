@@ -22,6 +22,7 @@ const userRouter = require("./routes/user.js");
 
 const mongoUrl = process.env.ATLUSURL;
 const secret = process.env.SECRET;
+const port = process.env.PORT;
 // MongoDB connection
 async function main() {
   await mongoose.connect(mongoUrl);
@@ -77,9 +78,7 @@ app.use((req, res, next) => {
 
 // Home route
 app.get("/", (req, res) => {
-  res.send(
-    `Hi, I am root <br> <a href="/listings">All Listings</a> <br><a href="/signup">SignUp</a> <br><a href="/login">SignIn</a>`
-  );
+  res.render("home.ejs");
 });
 
 app.use("/listings", listingsRouter);
@@ -99,6 +98,6 @@ app.use((err, req, res, next) => {
 });
 
 // Server port
-app.listen(3000, () => {
-  console.log("Server is listening on port 8080");
+app.listen(port, () => {
+  console.log(`Server is listening on port${port}`);
 });
