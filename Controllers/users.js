@@ -22,9 +22,14 @@ module.exports.getLogin = (req, res) => {
 };
 
 module.exports.login = async (req, res) => {
-  req.flash("success", "Welcome to Wonderlust!");
-  let redirectUrl = res.locals.redirectUrl || "/listings";
-  res.redirect(redirectUrl);
+  try {
+    req.flash("success", "Welcome to Wonderlust!");
+    let redirectUrl = res.locals.redirectUrl || "/";
+    res.redirect(redirectUrl);
+  } catch (e) {
+    req.flash("error", e.message);
+    res.redirect("/login");
+  }
 };
 
 module.exports.logout = (req, res, next) => {

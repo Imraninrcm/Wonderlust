@@ -4,7 +4,12 @@
   <div>Here is the routes you can go:</div>
   <ul>
     <li><a href="/listings">All Listings</a></li>
+
+    <% if(!currUser){ %>
     <li><a href="/signup">SignUp</a></li>
     <li><a href="/login">SignIn</a></li>
+    <% } %> <% if(currUser){ %>
+    <li><a href="/logout">Log Out</a></li>
+    <% } %>
   </ul>
 </body>
