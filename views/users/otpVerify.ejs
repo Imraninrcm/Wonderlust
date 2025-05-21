@@ -11,7 +11,7 @@
       >
         <div class="mb-3">
           <label for="otp" class="form-label"
-            >Enter the OTP sent to your Email:</label
+            >Enter the OTP sent to your <%= email %>:</label
           >
           <input
             type="number"
@@ -21,11 +21,44 @@
             class="form-control"
           />
         </div>
+
+        <!-- Countdown Timer Display -->
+        <div
+          id="timer"
+          style="font-weight: bold; color: #038065; margin-bottom: 10px"
+        ></div>
+
         <button class="btn btn-outline-success">Submit</button>
       </form>
+
       <div class="col-6 offset-3">
         <a class="nav-link" href="/login">Already have an Account</a>
       </div>
     </div>
   </div>
+
+  <!-- JavaScript Countdown Timer -->
+  <script>
+    let countdown = 300; // 5 minutes in seconds
+    const timerDisplay = document.getElementById("timer");
+
+    const updateTimer = () => {
+      const minutes = Math.floor(countdown / 60);
+      const seconds = countdown % 60;
+      timerDisplay.textContent = `OTP Expires in- ${minutes}:${seconds
+        .toString()
+        .padStart(2, "0")}`;
+
+      if (countdown > 0) {
+        countdown--;
+      } else {
+        timerDisplay.textContent =
+          "OTP expired. Please reload the page to get a new one.";
+        document.getElementById("otp").disabled = true;
+      }
+    };
+
+    updateTimer(); // Initial call
+    setInterval(updateTimer, 1000); // Call every second
+  </script>
 </body>

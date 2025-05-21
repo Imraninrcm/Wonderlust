@@ -34,7 +34,7 @@ router
     sendOTPEmail(email, otp);
 
     req.flash("success", `An OTP has been sent to your email: ${email}`);
-    res.render("users/otpVerify.ejs");
+    res.render("users/otpVerify.ejs", { email });
   });
 
 // === VERIFY OTP & REGISTER USER ===
