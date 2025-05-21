@@ -5,13 +5,14 @@
     <div class="col-6 offset-3">
       <form action="/signup" method="post" novalidate class="needs-validation">
         <div class="mb-3">
-          <label for="username" class="form-label"> Username:</label>
+          <label for="username" class="form-label"> Name:</label>
           <input
             type="text"
             name="username"
             required
             id="username"
             class="form-control"
+            placeholder="Enter your name"
           />
           <div class="valid-feedback">Looks good!</div>
         </div>
@@ -23,6 +24,7 @@
             required
             id="email"
             class="form-control"
+            placeholder="Enter your Email"
           />
           <div class="invalid-feedback">please enter a valid email</div>
         </div>
@@ -34,9 +36,10 @@
             required
             id="password"
             class="form-control"
+            placeholder="Create Strong Password"
           />
         </div>
-        <button class="btn btn-outline-success">SignUp</button>
+        <button class="btn btn-outline-success">Verify Email</button>
       </form>
       <div class="col-6 offset-3">
         <a class="nav-link" href="/login">Already have an Account</a>

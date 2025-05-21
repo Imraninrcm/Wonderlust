@@ -1,7 +1,13 @@
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
+
 const Listing = require("./models/listing");
 const Review = require("./models/reviews.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");
+const otpGenerator = require("otp-generator");
+const nodemailer = require("nodemailer");
 
 let IsloggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -99,11 +105,45 @@ const formatDate = (date, formatStyle = "MM DD YYYY") => {
   const month = months[date.getMonth()];
   const year = date.getFullYear();
   if (formatStyle === "DD MMM YYYY") {
-    return `${day} ${month} ${year}`;
+    return `${day} ${month}, ${year}`;
   } else {
-    return `${month} ${day} ${year}`;
+    return `${month} ${day}, ${year}`;
   }
 };
+
+const OtpGenerator = () => {
+  return otpGenerator.generate(6, {
+    upperCaseAlphabets: false,
+    specialChars: false,
+    lowerCaseAlphabets: false,
+  });
+};
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+function sendOTPEmail(toEmail, otp) {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: toEmail,
+    subject: "OTP from Wanderlust",
+    text: `Your OTP for Wanderlust is: ${otp}. Do not share it with anyone.`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log("Error sending OTP email:", error);
+    } else {
+      console.log("OTP email sent:", info.response);
+    }
+  });
+}
+
 module.exports = {
   IsloggedIn,
   saveRedirectUrl,
@@ -112,4 +152,6 @@ module.exports = {
   validateReview,
   isReviewAuthor,
   formatDate,
+  OtpGenerator,
+  sendOTPEmail,
 };

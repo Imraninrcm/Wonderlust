@@ -3,6 +3,11 @@ module.exports.getSignUp = (req, res) => {
   res.render("users/signup.ejs");
 };
 
+module.exports.authentication = (req, res) => {
+  let { username, email, password } = req.body;
+  res.render("users/otpverify.ejs");
+};
+
 module.exports.addUsers = async (req, res) => {
   try {
     let { username, email, password } = req.body;
