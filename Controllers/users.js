@@ -4,7 +4,6 @@ module.exports.getSignUp = (req, res) => {
 };
 
 module.exports.authentication = (req, res) => {
-  let { username, email, password } = req.body;
   res.render("users/otpverify.ejs");
 };
 
@@ -28,7 +27,7 @@ module.exports.getLogin = (req, res) => {
 
 module.exports.login = async (req, res) => {
   try {
-    req.flash("success", "Welcome to Wonderlust!");
+    req.flash("success", `Welcome to Wonderlust! @${req.body.username}`);
     let redirectUrl = res.locals.redirectUrl || "/";
     res.redirect(redirectUrl);
   } catch (e) {
@@ -42,7 +41,7 @@ module.exports.logout = (req, res, next) => {
     if (err) {
       next(err);
     }
-    req.flash("success", "You are logged out!");
+    req.flash("success", "You are logged out! ");
     res.redirect("/");
   });
 };
