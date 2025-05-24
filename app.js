@@ -85,7 +85,7 @@ app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-app.all("*", (req, res, next) => {
+app.all(/.*/, (req, res, next) => {
   console.log("Catch-all triggered for:", req.path);
   next(new ExpressError(404, "Page not found"));
 });
