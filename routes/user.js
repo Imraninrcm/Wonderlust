@@ -28,7 +28,7 @@ router
     // Save temp user data & OTP in session
     req.session.tempUser = { username, email, password };
     req.session.otp = otp;
-    req.session.otpExpires = Date.now() + 5 * 60 * 1000; // OTP valid for 5 minutes
+    req.session.otpExpires = Date.now() + 3 * 60 * 1000; // OTP valid for 5 minutes
 
     // Send OTP to user
     sendOTPEmail(email, otp);
