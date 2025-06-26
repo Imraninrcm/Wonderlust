@@ -1,16 +1,16 @@
-body {
-  background-color: #d3e2dd;
-  color: #000000;
-  font-family: "Plus Jakarta Sans", sans-serif;
-}
-
-.navbar {
-  height: 5rem !important;
-  background-color: white !important;
+nav {
+  background-color: #702cf5;
 }
 
 .nav-link {
-  color: #222222 !important;
+  color: #fefeff;
+}
+
+body {
+  background-color: #212529;
+  color: #ffffff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  height: 100vh;
 }
 
 h3 {
@@ -25,47 +25,6 @@ textarea {
   resize: none;
 }
 
-textarea {
-  resize: none;
-}
-
-.f-info-links a {
-  text-decoration: none;
-  color: #222222;
-}
-
-.f-info-links a:hover {
-  text-decoration: underline;
-}
-.f-info {
-  text-align: center;
-  height: 8rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: space-evenly;
-  background-color: #ebbebb;
-}
-
-.py-4,
-.py-md-5,
-.mt-5 {
-  background-color: #ebbebb !important;
-}
-
-.f-info-links,
-.f-info-socials,
-.f-info-brand {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.f-info-socials i {
-  font-size: 1.2rem;
-  margin-right: 1rem;
-}
 .card {
   border: none;
   margin-bottom: 2rem;
@@ -120,4 +79,12 @@ textarea {
 .delRV {
   border: none;
   background-color: transparent;
+}
+
+footer {
+  background-color: #2b3035;
+  color: #e2e5e9 !important;
+}
+a {
+  text-decoration: none;
 }

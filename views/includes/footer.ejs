@@ -1,14 +1,124 @@
-<footer class="bd-footer py-4 py-md-5 mt-5 bg-body-tertiary">
-  <div class="f-info">
-    <div class="f-info-socials">
-      <i class="fa-brands fa-facebook"></i>
-      <i class="fa-brands fa-instagram"></i>
-      <i class="fa-brands fa-linkedin"></i>
-    </div>
-    <div class="f-info-brand">&copy;Wonderlust Private Limited</div>
-    <div class="f-info-links">
-      <a href="/privacy">Privacy</a>
-      <a href="/term">Terms</a>
+<footer class="bd-footer py-4 py-md-5 mt-5">
+  <div class="container py-4 py-md-5 px-4 px-md-3">
+    <div class="row">
+      <div class="col-lg-3 mb-3">
+        <a
+          class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none"
+          href="/"
+          aria-label="Bootstrap"
+        >
+          <span class="fs-5" style="color: #ffffff; font-weight: bold"
+            >Wanderlust</span
+          >
+        </a>
+        <ul class="list-unstyled small">
+          <li class="mb-2">
+            Airbnb your Home, Resturants, and Hotels with Wanderlust.
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+        <h5>Links</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="/">Home</a></li>
+          <li class="mb-2"><a href="/listings">Explore</a></li>
+          <li class="mb-2"><a href="/listings/new">Airbnb your home</a></li>
+          <% if(!currUser){ %>
+          <li class="mb-2">
+            <a href="/signup"><b>Sign Up</b></a>
+          </li>
+          <li class="mb-2">
+            <a href="/login"><b>Log In</b></a>
+          </li>
+          <% } %> <% if(currUser){ %>
+          <li class="mb-2">
+            <a href="/logout"><b>Log Out</b></a>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2 mb-3">
+        <h5>Projects</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <a
+              href="https://imraninrcm.github.io/Q-Music-set/"
+              target="_blank"
+              rel="noopener"
+              >Music-set</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="https://imraninrcm.github.io/SearchPlateFomrs/"
+              target="_blank"
+              rel="noopener"
+              >Search Engines</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="https://imraninrcm.github.io/2048/"
+              target="_blank"
+              rel="noopener"
+              >2048</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="https://password-generator-mu-sandy.vercel.app/"
+              target="_blank"
+              rel="noopener"
+              >Create Strong PassWord</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2 mb-3">
+        <h5>Community</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <a
+              href="https://github.com/twbs/bootstrap/issues"
+              target="_blank"
+              rel="noopener"
+              >Issues</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="https://github.com/twbs/bootstrap/discussions"
+              target="_blank"
+              rel="noopener"
+              >Discussions</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="https://github.com/sponsors/twbs"
+              target="_blank"
+              rel="noopener"
+              >Corporate sponsors</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="https://opencollective.com/bootstrap"
+              target="_blank"
+              rel="noopener"
+              >Open Collective</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="https://stackoverflow.com/questions/tagged/bootstrap-5"
+              target="_blank"
+              rel="noopener"
+              >Stack Overflow</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </footer>
