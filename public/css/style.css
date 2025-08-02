@@ -1,14 +1,6 @@
-nav {
-  background-color: #702cf5;
-}
-
-.nav-link {
-  color: #fefeff;
-}
-
 body {
-  background-color: #212529;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   font-family: "Plus Jakarta Sans", sans-serif;
   height: 100vh;
 }
@@ -82,8 +74,8 @@ textarea {
 }
 
 footer {
-  background-color: #2b3035;
-  color: #e2e5e9 !important;
+  background-color: #acb0b4;
+  color: #442d39 !important;
 }
 a {
   text-decoration: none;
