@@ -1,38 +1,59 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-  <h1 class="col-6 offset-3">Authenticating Email</h1>
-  <div class="row">
-    <div class="col-6 offset-3">
-      <form
-        action="/verify-otp"
-        method="post"
-        novalidate
-        class="needs-validation"
-      >
-        <div class="mb-3">
-          <label for="otp" class="form-label"
-            >Enter the OTP sent to your <%= email %>:</label
+  <div
+    class="row justify-content-center align-items-center"
+    style="min-height: 80vh"
+  >
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4" style="border-radius: 1.5rem">
+        <h2 class="text-center mb-3" style="color: #1d8cb8; font-weight: bold">
+          Email Verification
+        </h2>
+        <p class="text-center mb-4" style="color: #145a7a">
+          Please enter the OTP sent to
+          <span style="font-weight: 600"><%= email %></span> to verify your
+          email address.
+        </p>
+        <form
+          action="/verify-otp"
+          method="post"
+          novalidate
+          class="needs-validation"
+        >
+          <div class="mb-3">
+            <label for="otp" class="form-label" style="font-weight: 500">
+              OTP Code
+            </label>
+            <input
+              type="number"
+              name="otp"
+              required
+              id="otp"
+              class="form-control text-center"
+              placeholder="Enter 6-digit OTP"
+              style="font-size: 1.2rem; letter-spacing: 0.2em"
+            />
+          </div>
+
+          <!-- Countdown Timer Display -->
+          <div
+            id="timer"
+            class="text-center mb-3"
+            style="font-weight: bold; color: #038065; font-size: 1.1rem"
+          ></div>
+
+          <button
+            class="btn btn-success w-100"
+            style="font-weight: 500; font-size: 1.1rem"
           >
-          <input
-            type="number"
-            name="otp"
-            required
-            id="otp"
-            class="form-control"
-          />
+            Verify OTP
+          </button>
+        </form>
+        <div class="text-center mt-3">
+          <a class="nav-link" href="/login" style="color: #1d8cb8"
+            >Already have an Account?</a
+          >
         </div>
-
-        <!-- Countdown Timer Display -->
-        <div
-          id="timer"
-          style="font-weight: bold; color: #038065; margin-bottom: 10px"
-        ></div>
-
-        <button class="btn btn-outline-success">Submit</button>
-      </form>
-
-      <div class="col-6 offset-3">
-        <a class="nav-link" href="/login">Already have an Account</a>
       </div>
     </div>
   </div>
@@ -45,7 +66,7 @@
     const updateTimer = () => {
       const minutes = Math.floor(countdown / 60);
       const seconds = countdown % 60;
-      timerDisplay.textContent = `OTP Expires in- ${minutes}:${seconds
+      timerDisplay.textContent = `OTP Expires in: ${minutes}:${seconds
         .toString()
         .padStart(2, "0")}`;
 

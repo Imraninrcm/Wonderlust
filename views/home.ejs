@@ -1,15 +1,131 @@
 <% layout("layouts/boilerplate") %>
+<style>
+  /* ...existing code... */
+  .card {
+    border: 2px solid #1d8cb8 !important;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(29, 140, 184, 0.1);
+    transition: box-shadow 0.2s, border-color 0.2s;
+    padding: 10px;
+  }
+  .card:hover {
+    border-color: #145a7a !important;
+    box-shadow: 0 8px 24px rgba(29, 140, 184, 0.18);
+  }
+</style>
 <body>
-  <h1>Welcome To the Wonderlust</h1>
-  <div>Here is the routes you can go:</div>
-  <ul>
-    <li><a href="/listings">All Listings</a></li>
-
-    <% if(!currUser){ %>
-    <li><a href="/signup">SignUp</a></li>
-    <li><a href="/login">SignIn</a></li>
-    <% } %> <% if(currUser){ %>
-    <li><a href="/logout">Log Out</a></li>
-    <% } %>
-  </ul>
+  <section class="text-center py-5">
+    <h1 class="display-4 mb-3" style="font-weight: bold; color: #1d8cb8">
+      Welcome to Wonderlust
+    </h1>
+    <p class="lead mb-4" style="font-size: 1.3rem">
+      Discover, list, and review unique stays and experiences around the
+      world.<br />
+      Wonderlust connects travelers and hosts, making it easy to find your next
+      adventure or share your space.
+    </p>
+    <div class="mb-4">
+      <img
+        src="/assets/icon.png"
+        alt="Wonderlust Logo"
+        width="100"
+        class="mb-3"
+      />
+    </div>
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-3">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <i
+              class="fa-solid fa-magnifying-glass-location fa-2x mb-2"
+              style="color: #1d8cb8"
+            ></i>
+            <h5 class="card-title">Explore Listings</h5>
+            <p class="card-text">
+              Browse homes, hotels, and restaurants by country or location. Find
+              your perfect stay!
+            </p>
+            <a
+              href="/listings"
+              class="btn btn-primary"
+              title="View all listings"
+              >View Listings</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <i
+              class="fa-solid fa-house-user fa-2x mb-2"
+              style="color: #1d8cb8"
+            ></i>
+            <h5 class="card-title">Host Your Place</h5>
+            <p class="card-text">
+              Have a space to share? List your property and connect with
+              travelers worldwide.
+            </p>
+            <a
+              href="/listings/new"
+              class="btn btn-success"
+              title="List your property"
+              >Airbnb Your Home</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <i
+              class="fa-solid fa-user-plus fa-2x mb-2"
+              style="color: #1d8cb8"
+            ></i>
+            <h5 class="card-title">Join Wonderlust</h5>
+            <p class="card-text">
+              Sign up to save your favorite listings, leave reviews, and manage
+              your bookings.
+            </p>
+            <% if(!currUser){ %>
+            <a href="/signup" class="btn btn-outline-primary" title="Sign up"
+              >Sign Up</a
+            >
+            <a
+              href="/login"
+              class="btn btn-outline-secondary ms-2"
+              title="Sign in"
+              >Sign In</a
+            >
+            <% } else { %>
+            <a href="/logout" class="btn btn-outline-danger" title="Log out"
+              >Log Out</a
+            >
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4 class="mb-3" style="color: #1d8cb8">How Wonderlust Works</h4>
+      <ul
+        class="list-group list-group-flush d-inline-block text-start"
+        style="max-width: 600px"
+      >
+        <li class="list-group-item">
+          🔍 <b>Search</b> for listings by country or location using the search
+          bar.
+        </li>
+        <li class="list-group-item">
+          🏠 <b>List</b> your property and reach thousands of travelers.
+        </li>
+        <li class="list-group-item">
+          📝 <b>Review</b> and rate your experiences to help the community.
+        </li>
+        <li class="list-group-item">
+          🔒 <b>Secure</b> and easy sign up with email verification.
+        </li>
+      </ul>
+    </div>
+  </section>
 </body>

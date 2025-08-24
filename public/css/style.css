@@ -1,8 +1,16 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   background-color: #ffffff;
   color: #000000;
   font-family: "Plus Jakarta Sans", sans-serif;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 h3 {
@@ -49,34 +57,25 @@ textarea {
   text-decoration: none;
 }
 
-.show-img {
-  height: 30vh;
-}
-
-.btns {
-  padding: 1%;
-  display: flex;
-  justify-content: center;
-}
-
-.error {
-  display: flex !important;
-  align-items: center !important;
-}
-
-.reviewCard {
-  padding: 10px;
-}
-
-.delRV {
-  border: none;
-  background-color: transparent;
-}
-
 footer {
   background-color: #acb0b4;
   color: #442d39 !important;
+  flex-shrink: 0;
 }
+
+main {
+  flex: 1 0 auto;
+}
+
 a {
   text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 15rem; /* Adjust image height on smaller screens */
+  }
+  .card {
+    margin-bottom: 1.5rem; /* Add vertical gap between cards */
+  }
 }

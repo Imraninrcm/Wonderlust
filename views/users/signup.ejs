@@ -1,49 +1,91 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-  <h1 class="col-6 offset-3">SignUp On Wonderlust</h1>
-  <div class="row">
-    <div class="col-6 offset-3">
-      <form action="/signup" method="post" novalidate class="needs-validation">
-        <div class="mb-3">
-          <label for="username" class="form-label"> Name:</label>
-          <input
-            type="text"
-            name="username"
-            required
-            id="username"
-            class="form-control"
-            placeholder="Enter your name"
-          />
-          <div class="valid-feedback">Looks good!</div>
+  <div
+    class="row justify-content-center align-items-center"
+    style="min-height: 80vh"
+  >
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4" style="border-radius: 1.5rem">
+        <h1 class="text-center mb-4" style="color: #1d8cb8; font-weight: bold">
+          Sign Up On Wonderlust
+        </h1>
+        <form
+          action="/signup"
+          method="post"
+          novalidate
+          class="needs-validation"
+        >
+          <div class="mb-3">
+            <label for="username" class="form-label">Name:</label>
+            <input
+              type="text"
+              name="username"
+              required
+              id="username"
+              class="form-control"
+              placeholder="Enter your name"
+              autocomplete="off"
+            />
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input
+              type="email"
+              name="email"
+              required
+              id="email"
+              class="form-control"
+              placeholder="Enter your email address"
+              autocomplete="off"
+            />
+            <div class="invalid-feedback">Please enter a valid email</div>
+          </div>
+          <div class="mb-3 position-relative">
+            <label for="password" class="form-label">Password:</label>
+            <input
+              type="password"
+              name="password"
+              required
+              id="password"
+              class="form-control"
+              placeholder="Create a strong password"
+              autocomplete="off"
+            />
+            <span
+              class="position-absolute"
+              style="top: 38px; right: 15px; cursor: pointer; z-index: 2"
+              onclick="togglePassword()"
+              title="Show/Hide Password"
+            >
+              <i id="eyeIcon" class="fa-regular fa-eye"></i>
+            </span>
+          </div>
+          <button class="btn btn-success w-100 mt-3" style="font-weight: 500">
+            Verify Email
+          </button>
+        </form>
+        <div class="text-center mt-3">
+          <a class="nav-link" href="/login" title="Go to login"
+            >Already have an Account?</a
+          >
         </div>
-        <div class="mb-3">
-          <label for="email" class="form-label"> Email:</label>
-          <input
-            type="email"
-            name="email"
-            required
-            id="email"
-            class="form-control"
-            placeholder="Enter your Email"
-          />
-          <div class="invalid-feedback">please enter a valid email</div>
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label"> Password:</label>
-          <input
-            type="password"
-            name="password"
-            required
-            id="password"
-            class="form-control"
-            placeholder="Create Strong Password"
-          />
-        </div>
-        <button class="btn btn-outline-success">Verify Email</button>
-      </form>
-      <div class="col-6 offset-3">
-        <a class="nav-link" href="/login">Already have an Account</a>
       </div>
     </div>
   </div>
+  <script>
+    function togglePassword() {
+      const pwd = document.getElementById("password");
+      const icon = document.getElementById("eyeIcon");
+      if (pwd.type === "password") {
+        pwd.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        pwd.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
+  </script>
 </body>

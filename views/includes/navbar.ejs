@@ -5,6 +5,7 @@
     >
       <a
         href="/"
+        title="Home"
         class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
       >
         <i
@@ -27,26 +28,35 @@
         class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
       >
         <li>
-          <a href="/listings" class="nav-link px-2 link-secondary">Explore</a>
-        </li>
-        <li>
-          <a href="/listings/new" class="nav-link px-2 link-body-emphasis"
-            >Airbnb your home</a
+          <a
+            href="/listings"
+            class="nav-link px-2 link-secondary"
+            title="All listings"
+            >Explore</a
           >
         </li>
         <li>
-          <a href="#" class="nav-link px-2 link-body-emphasis">Customers</a>
-        </li>
-        <li>
-          <a href="#" class="nav-link px-2 link-body-emphasis">Products</a>
+          <a
+            href="/listings/new"
+            class="nav-link px-2 link-body-emphasis"
+            title="Add new listing here Wonderlust"
+            >Airbnb your home</a
+          >
         </li>
       </ul>
-      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+      <form
+        class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
+        role="search"
+        action="/search"
+        method="GET"
+      >
         <input
           type="search"
           class="form-control"
-          placeholder="Search..."
+          name="q"
+          placeholder="Search by country or location..."
           aria-label="Search"
+          required
         />
       </form>
       <div class="dropdown text-end">
@@ -55,9 +65,10 @@
           class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
           data-bs-toggle="dropdown"
           aria-expanded="false"
+          title="Users here"
         >
           <img
-            src="https://github.com/mdo.png"
+            src="https://thumbs.dreamstime.com/b/avatar-icon-avatar-flat-symbol-isolated-white-avatar-icon-avatar-flat-symbol-isolated-white-background-avatar-simple-icon-124920496.jpg"
             alt="mdo"
             width="32"
             height="32"
@@ -65,9 +76,11 @@
           />
         </a>
         <ul class="dropdown-menu text-small">
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li>
+            <a class="dropdown-item" href="/listings/new">New Listing...</a>
+          </li>
+          <li><a class="dropdown-item" href="/user-setting">Settings</a></li>
+          <li><a class="dropdown-item" href="/profile">Profile</a></li>
           <li><hr class="dropdown-divider" /></li>
           <% if(!currUser){ %>
           <li><a class="dropdown-item" href="/signup">Sign Up</a></li>

@@ -1,27 +1,40 @@
 <% layout("/layouts/boilerplate") %>
 
-<body>
-  <h3>All Listings</h3>
+<div class="container mt-4">
+  <h3 class="mb-4 text-center" style="color: #1d8cb8; font-weight: bold">
+    Explore Our Listings
+  </h3>
 
-  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
-    <% for(list of listings){%>
-    <a href="/listings/<%= list._id %>" class="listing-link">
-      <div class="card col">
-        <img
-          src="<%= list.image.url %>"
-          class="card-img-top"
-          alt="Listing_image"
-        />
-        <div class="card-img-overlay"></div>
-        <div class="card-body">
-          <p class="card-text">
-            <%= list.title %>
-            <br />
-            &#8377;<%= list.price.toLocaleString("en-IN") %> / night
-          </p>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <% for(let list of listings){ %>
+    <div class="col">
+      <a
+        href="/listings/<%= list._id %>"
+        class="listing-link"
+        title="<%= list.title %>"
+      >
+        <div class="card shadow-sm h-100" style="border-radius: 1rem">
+          <img
+            src="<%= list.image.url %>"
+            class="card-img-top"
+            alt="Listing_image"
+            style="
+              height: 220px;
+              object-fit: cover;
+              border-top-left-radius: 1rem;
+              border-top-right-radius: 1rem;
+            "
+          />
+          <div class="card-body">
+            <h5 class="card-title text-truncate"><%= list.title %></h5>
+            <p class="card-text">
+              <i class="fas fa-tag me-1"></i>
+              &#8377;<%= list.price.toLocaleString("en-IN") %> / night
+            </p>
+          </div>
         </div>
-      </div>
-    </a>
-    <%} %>
+      </a>
+    </div>
+    <% } %>
   </div>
-</body>
+</div>

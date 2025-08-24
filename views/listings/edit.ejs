@@ -1,8 +1,14 @@
 <% layout("/layouts/boilerplate") %>
-<body>
-  <h3>Edit your listing</h3>
-  <div class="row">
-    <div class="col-8 offset-2">
+
+<div
+  class="row justify-content-center align-items-center"
+  style="min-height: 80vh"
+>
+  <div class="col-md-8">
+    <div class="card shadow-lg p-4" style="border-radius: 1.5rem">
+      <h2 class="text-center mb-4" style="color: #1d8cb8; font-weight: bold">
+        Edit Your Listing
+      </h2>
       <form
         action="/listings/<%= list._id %>?_method=PUT"
         method="post"
@@ -11,7 +17,7 @@
         enctype="multipart/form-data"
       >
         <div class="mb-3">
-          <label for="title" class="form-label"> Title:</label>
+          <label for="title" class="form-label">Title:</label>
           <input
             type="text"
             name="listing[title]"
@@ -19,33 +25,47 @@
             required
             id="title"
             class="form-control"
+            placeholder="e.g. Cozy Mountain Retreat"
           />
           <div class="invalid-feedback">Please enter a valid title.</div>
         </div>
         <div class="mb-3">
-          <label for="description" class="form-label">Decription:</label>
-          <textarea class="form-control" name="listing[description]" required>
-<%=list.description %></textarea
+          <label for="description" class="form-label">Description:</label>
+          <textarea
+            class="form-control"
+            name="listing[description]"
+            required
+            rows="3"
+            placeholder="Share what makes this place special!"
           >
-          <div class="invalid-feedback">Please enter a short description</div>
+<%= list.description %></textarea
+          >
+          <div class="invalid-feedback">Please enter a short description.</div>
         </div>
         <div class="mb-3">
-          Original listing Image <br />
-          <img src="<%= originalUrl %>" alt="" />
+          <label class="form-label">Current Listing Image:</label>
+          <img
+            src="<%= list.image.url %>"
+            alt="Current Listing Image"
+            class="img-fluid"
+            style="max-height: 200px"
+          />
         </div>
         <div class="mb-3">
-          <label for="image" class="form-label">Upload New Image:</label>
+          <label for="image" class="form-label"
+            >Upload New Image (Optional):</label
+          >
           <input
             type="file"
             name="listing[image]"
             class="form-control"
-            value="<%= list.image.filename %>"
+            accept="image/*"
           />
-          <div class="invalid-feedback">Please upload a valid Image</div>
+          <div class="invalid-feedback">Please upload a valid image.</div>
         </div>
         <div class="row">
           <div class="mb-3 col-md-6">
-            <label for="price" class="form-label"> Price:</label>
+            <label for="price" class="form-label">Price per Night:</label>
             <input
               type="number"
               value="<%= list.price %>"
@@ -53,67 +73,51 @@
               class="form-control"
               required
               min="100"
+              placeholder="e.g. 150"
             />
-            <div class="invalid-feedback">Price should be &ge; 100</div>
+            <div class="invalid-feedback">Price should be at least 100.</div>
           </div>
           <div class="mb-3 col-md-6">
-            <label for="country" class="form-label"> Country name:</label>
+            <label for="country" class="form-label">Country:</label>
             <input
               type="text"
               name="listing[country]"
               value="<%= list.country %>"
               class="form-control"
               required
+              placeholder="e.g. India"
             />
-            <div class="invalid-feedback">Please enter valid country name.</div>
+            <div class="invalid-feedback">
+              Please enter a valid country name.
+            </div>
           </div>
         </div>
         <div class="mb-3">
-          <label for="location" class="form-label"> Loaction:</label>
+          <label for="location" class="form-label">Location/City:</label>
           <input
             type="text"
             name="listing[location]"
             value="<%= list.location %>"
             class="form-control"
             required
+            placeholder="e.g. Manali"
           />
           <div class="invalid-feedback">Please provide a valid location.</div>
         </div>
         <div class="mb-3 d-flex justify-content-between">
-          <button type="submit" title="Save" class="btn btn-outline-secondary">
-            Save
-          </button>
-
-          <a href="/listings/<%= list._id %>" class="btn btn-outline-danger"
-            >Cancel</a
+          <button
+            type="submit"
+            title="Save"
+            class="btn btn-success px-4"
+            style="font-weight: 500"
           >
+            <i class="fas fa-save"></i> Save Changes
+          </button>
+          <a href="/listings/<%= list._id %>" class="btn btn-outline-danger">
+            <i class="fas fa-times"></i> Cancel
+          </a>
         </div>
       </form>
     </div>
   </div>
-  <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (() => {
-      "use strict";
-
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      const forms = document.querySelectorAll(".needs-validation");
-
-      // Loop over them and prevent submission
-      Array.from(forms).forEach((form) => {
-        form.addEventListener(
-          "submit",
-          (event) => {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-
-            form.classList.add("was-validated");
-          },
-          false
-        );
-      });
-    })();
-  </script>
-</body>
+</div>
