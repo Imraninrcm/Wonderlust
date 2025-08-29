@@ -1,4 +1,5 @@
-<% layout("/layouts/boilerplate") %>
+<% title = list ? (list.title + " - Wonderlust") : "Listing - Wonderlust" %> <%
+layout("/layouts/boilerplate") %>
 <body>
   <div class="container mt-4">
     <div class="row justify-content-center">
@@ -68,7 +69,7 @@
               class="needs-validation"
             >
               <div class="mb-3">
-                <label class="form-label">Your Rating:</label>
+                <label class="form-label">Add Rating:</label>
                 <div class="d-flex align-items-center">
                   <fieldset class="starability-slot">
                     <input
@@ -119,10 +120,7 @@
                     <label for="first-rate5" title="Loved it!">5 stars</label>
                   </fieldset>
                 </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="comment" class="form-label">Your Review:</label>
+                <label for="comment" class="form-label">Add Comment:</label>
                 <textarea
                   name="review[comment]"
                   id="comment"
@@ -149,49 +147,50 @@
         <h4 class="mt-4">Reviews:</h4>
         <div class="row">
           <% for(let rv of list.reviews){ %>
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-            <div class="card reviewCard">
-              <div
-                class="card-body"
-                title="Review added by <%= rv.author.username %>"
-              >
-                <h5 class="card-title d-flex justify-content-between">
-                  <span>@<%= rv.author.username %></span
-                  ><span
-                    ><% if(currUser && currUser._id.equals(rv.author._id)){ %>
-                    <form
-                      class="mb-3"
-                      action="/listings/<%= list._id %>/reviews/<%= rv._id %>?_method=DELETE"
-                      method="post"
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-3 cardRV">
+            <div
+              class="card-body"
+              title="Review added by <%= rv.author.username.toUpperCase() %>"
+            >
+              <h5 class="card-title d-flex justify-content-between">
+                <span>@<%= rv.author.username %></span>
+                <span
+                  ><% if(currUser && currUser._id.equals(rv.author._id)){ %>
+                  <form
+                    class="mb-3"
+                    action="/listings/<%= list._id %>/reviews/<%= rv._id %>?_method=DELETE"
+                    method="post"
+                  >
+                    <button
+                      type="submit"
+                      class="delRV"
+                      title="delete the review"
                     >
-                      <button
-                        type="submit"
-                        class="delRV"
-                        title="delete the review"
-                      >
-                        <i
-                          class="fa-regular fa-trash-can"
-                          style="color: #ff0000"
-                        ></i>
-                      </button>
-                    </form>
-                    <% } %></span
-                  >
-                </h5>
-                <p class="starability-result" data-rating="<%= rv.rating%>"></p>
-                <p class="card-text d-flex justify-content-between">
-                  <span style="font-size: large"><%= rv.comment%></span>
-                  <span class="text-body-tertiary">
-                    <%= formatDate(rv.createdAt)%></span
-                  >
-                </p>
-              </div>
+                      <i
+                        class="fa-regular fa-trash-can"
+                        style="color: #ff0000"
+                      ></i>
+                    </button>
+                  </form>
+                  <% } %></span
+                >
+              </h5>
+              <p class="starability-result" data-rating="<%= rv.rating%>"></p>
+              <p class="card-text d-flex justify-content-between">
+                <span style="font-size: large"><%= rv.comment%></span>
+              </p>
+              <hr />
+              <p class="card-text d-flex justify-content-between">
+                <span class="text-body-tertiary">
+                  Added on: <b><%= formatDate(rv.createdAt)%></b></span
+                >
+              </p>
             </div>
           </div>
-          <% } %>
         </div>
         <% } %>
       </div>
+      <% } %>
     </div>
   </div>
 </body>

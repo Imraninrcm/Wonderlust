@@ -47,6 +47,17 @@ textarea {
   padding: 0;
 }
 
+.delRV {
+  background-color: transparent;
+  border: none;
+}
+
+.cardRV {
+  border: 1.5px solid black;
+  border-radius: 20px;
+  margin: 0 3px;
+}
+
 .card-text {
   font-weight: 400;
   margin: 1%;
