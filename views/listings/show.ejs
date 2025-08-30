@@ -1,196 +1,182 @@
 <% title = list ? (list.title + " - Wonderlust") : "Listing - Wonderlust" %> <%
 layout("/layouts/boilerplate") %>
 <body>
-  <div class="container mt-4">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <!-- Listing Card -->
-        <div class="card shadow-sm" style="border-radius: 1rem">
-          <img
-            src="<%= list.image.url %>"
-            class="card-img-top img-fluid"
-            alt="Listing Image"
-            style="border-top-right-radius: 1rem"
-          />
-          <div class="card-body p-4">
-            <h2
-              class="card-title mb-3"
-              style="color: #2c3e50; font-weight: 600"
-            >
-              <%= list.title %>
-            </h2>
-            <p class="card-text"><%= list.description %></p>
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <small class="text-muted">
-                <i class="fas fa-map-marker-alt me-1"></i> <%= list.location %>,
-                <%= list.country %>
-              </small>
-              <span class="badge bg-light text-dark"
-                ><i class="fas fa-tag me-1"></i> <%= list.price %> / night</span
-              >
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top p-3">
-            <small class="text-muted">
-              Listed by
-              <span style="font-weight: bold"><%= list.owner.username %></span>
-              on <%= formatDate(list.createdAt) %>
-            </small>
-          </div>
-        </div>
-
-        <!-- Edit/Delete Buttons (if owner) -->
-        <% if(currUser && currUser._id.equals(list.owner._id)){ %>
-        <div class="d-flex justify-content-end mt-3">
-          <a
-            href="/listings/<%= list._id %>/edit"
-            class="btn btn-outline-primary me-2"
-            ><i class="fas fa-edit"></i> Edit</a
+  <div class="row justify-content-center mt-4 mx-4">
+    <!-- Listing Card -->
+    <div class="card shadow-sm" style="border-radius: 1rem">
+      <img
+        src="<%= list.image.url %>"
+        class="card-img-top img-fluid"
+        alt="Listing Image"
+        style="border-top-right-radius: 1rem"
+      />
+      <div class="card-body p-4">
+        <h2 class="card-title mb-3" style="color: #2c3e50; font-weight: 600">
+          <%= list.title %>
+        </h2>
+        <p class="card-text"><%= list.description %></p>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <small class="text-muted">
+            <i class="fas fa-map-marker-alt me-1"></i> <%= list.location %>, <%=
+            list.country %>
+          </small>
+          <span class="badge bg-light text-dark"
+            ><i class="fas fa-tag me-1"></i> <%= list.price %> / night</span
           >
-          <form action="/listings/<%= list._id %>?_method=DELETE" method="post">
-            <button type="submit" class="btn btn-danger">
-              <i class="fas fa-trash-alt"></i> Delete
-            </button>
-          </form>
         </div>
-        <% } %>
-
-        <hr class="my-4" />
-
-        <!-- Review Section -->
-        <% if(currUser){%>
-        <div class="mb-4">
-          <h4>Share Your Experience</h4>
-          <div class="card shadow-sm p-3" style="border-radius: 1rem">
-            <form
-              action="/listings/<%= list._id %>/reviews"
-              method="post"
-              novalidate
-              class="needs-validation"
-            >
-              <div class="mb-3">
-                <label class="form-label">Add Rating:</label>
-                <div class="d-flex align-items-center">
-                  <fieldset class="starability-slot">
-                    <input
-                      type="radio"
-                      id="no-rate"
-                      class="input-no-rate"
-                      name="review[rating]"
-                      value="1"
-                      checked
-                      aria-label="No rating."
-                    />
-                    <input
-                      type="radio"
-                      id="first-rate1"
-                      name="review[rating]"
-                      value="1"
-                    />
-                    <label for="first-rate1" title="Hated it">1 star</label>
-                    <input
-                      type="radio"
-                      id="first-rate2"
-                      name="review[rating]"
-                      value="2"
-                    />
-                    <label for="first-rate2" title="Didn't like it"
-                      >2 stars</label
-                    >
-                    <input
-                      type="radio"
-                      id="first-rate3"
-                      name="review[rating]"
-                      value="3"
-                    />
-                    <label for="first-rate3" title="It was OK">3 stars</label>
-                    <input
-                      type="radio"
-                      id="first-rate4"
-                      name="review[rating]"
-                      value="4"
-                    />
-                    <label for="first-rate4" title="Liked it">4 stars</label>
-                    <input
-                      type="radio"
-                      id="first-rate5"
-                      name="review[rating]"
-                      value="5"
-                    />
-                    <label for="first-rate5" title="Loved it!">5 stars</label>
-                  </fieldset>
-                </div>
-                <label for="comment" class="form-label">Add Comment:</label>
-                <textarea
-                  name="review[comment]"
-                  id="comment"
-                  rows="3"
-                  class="form-control"
-                  placeholder="Share your thoughts about this place..."
-                  required
-                ></textarea>
-                <div class="invalid-feedback">Please add your review.</div>
-              </div>
-
-              <div class="d-grid">
-                <button type="submit" class="btn btn-success">
-                  <i class="fa fa-paper-plane me-2"></i> Submit Review
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <% } %>
-
-        <!-- Display Reviews -->
-        <% if(list.reviews.length > 0){ %>
-        <h4 class="mt-4">Reviews:</h4>
-        <div class="row">
-          <% for(let rv of list.reviews){ %>
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-3 cardRV">
-            <div
-              class="card-body"
-              title="Review added by <%= rv.author.username.toUpperCase() %>"
-            >
-              <h5 class="card-title d-flex justify-content-between">
-                <span>@<%= rv.author.username %></span>
-                <span
-                  ><% if(currUser && currUser._id.equals(rv.author._id)){ %>
-                  <form
-                    class="mb-3"
-                    action="/listings/<%= list._id %>/reviews/<%= rv._id %>?_method=DELETE"
-                    method="post"
-                  >
-                    <button
-                      type="submit"
-                      class="delRV"
-                      title="delete the review"
-                    >
-                      <i
-                        class="fa-regular fa-trash-can"
-                        style="color: #ff0000"
-                      ></i>
-                    </button>
-                  </form>
-                  <% } %></span
-                >
-              </h5>
-              <p class="starability-result" data-rating="<%= rv.rating%>"></p>
-              <p class="card-text d-flex justify-content-between">
-                <span style="font-size: large"><%= rv.comment%></span>
-              </p>
-              <hr />
-              <p class="card-text d-flex justify-content-between">
-                <span class="text-body-tertiary">
-                  Added on: <b><%= formatDate(rv.createdAt)%></b></span
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-        <% } %>
       </div>
-      <% } %>
+      <div class="card-footer bg-transparent border-top p-3">
+        <small class="text-muted">
+          Listed by
+          <span style="font-weight: bold"><%= list.owner.username %></span>
+          on <%= formatDate(list.createdAt) %>
+        </small>
+      </div>
     </div>
+
+    <!-- Edit/Delete Buttons (if owner) -->
+    <% if(currUser && currUser._id.equals(list.owner._id)){ %>
+    <div class="d-flex justify-content-end mt-3">
+      <a
+        href="/listings/<%= list._id %>/edit"
+        class="btn btn-outline-primary me-2"
+        ><i class="fas fa-edit"></i> Edit</a
+      >
+      <form action="/listings/<%= list._id %>?_method=DELETE" method="post">
+        <button type="submit" class="btn btn-danger">
+          <i class="fas fa-trash-alt"></i> Delete
+        </button>
+      </form>
+    </div>
+    <% } %>
+  </div>
+
+  <hr />
+
+  <!-- Review Section -->
+  <% if(currUser){%>
+  <div class="row justify-content-center mt-4 mx-4">
+    <h4>Share Your Experience</h4>
+    <div class="card shadow-sm p-3" style="border-radius: 1rem">
+      <form
+        action="/listings/<%= list._id %>/reviews"
+        method="post"
+        novalidate
+        class="needs-validation"
+      >
+        <div class="mb-3">
+          <label class="form-label">Add Rating:</label>
+          <div class="d-flex align-items-center">
+            <fieldset class="starability-slot">
+              <input
+                type="radio"
+                id="no-rate"
+                class="input-no-rate"
+                name="review[rating]"
+                value="1"
+                checked
+                aria-label="No rating."
+              />
+              <input
+                type="radio"
+                id="first-rate1"
+                name="review[rating]"
+                value="1"
+              />
+              <label for="first-rate1" title="Hated it">1 star</label>
+              <input
+                type="radio"
+                id="first-rate2"
+                name="review[rating]"
+                value="2"
+              />
+              <label for="first-rate2" title="Didn't like it">2 stars</label>
+              <input
+                type="radio"
+                id="first-rate3"
+                name="review[rating]"
+                value="3"
+              />
+              <label for="first-rate3" title="It was OK">3 stars</label>
+              <input
+                type="radio"
+                id="first-rate4"
+                name="review[rating]"
+                value="4"
+              />
+              <label for="first-rate4" title="Liked it">4 stars</label>
+              <input
+                type="radio"
+                id="first-rate5"
+                name="review[rating]"
+                value="5"
+              />
+              <label for="first-rate5" title="Loved it!">5 stars</label>
+            </fieldset>
+          </div>
+          <label for="comment" class="form-label">Add Comment:</label>
+          <textarea
+            name="review[comment]"
+            id="comment"
+            rows="3"
+            class="form-control"
+            placeholder="Share your thoughts about this place..."
+            required
+          ></textarea>
+          <div class="invalid-feedback">Please add your review.</div>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-success">
+            <i class="fa fa-paper-plane me-2"></i> Submit Review
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <% } %>
+
+  <!-- Display Reviews -->
+  <div class="row mt-4 mx-4">
+    <% if(list.reviews.length > 0){ %>
+
+    <h4 class="mt-4">Reviews:</h4>
+
+    <% for( rv of list.reviews){ %>
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 cardRV">
+      <div
+        class="card-body"
+        title="Review added by <%= rv.author.username.toUpperCase() %>"
+      >
+        <h5 class="card-title d-flex justify-content-between">
+          <span>@<%= rv.author.username %></span>
+          <span
+            ><% if(currUser && currUser._id.equals(rv.author._id)){ %>
+            <form
+              class="mb-3"
+              action="/listings/<%= list._id %>/reviews/<%= rv._id %>?_method=DELETE"
+              method="post"
+            >
+              <button type="submit" class="delRV" title="delete the review">
+                <i class="fa-regular fa-trash-can" style="color: #ff0000"></i>
+              </button>
+            </form>
+            <% } %></span
+          >
+        </h5>
+        <p class="starability-result" data-rating="<%= rv.rating%>"></p>
+        <p class="card-text d-flex justify-content-between">
+          <span style="font-size: large"><%= rv.comment%></span>
+        </p>
+        <hr />
+        <p class="card-text d-flex justify-content-between">
+          <span class="text-body-tertiary">
+            Added on: <b><%= formatDate(rv.createdAt)%></b></span
+          >
+        </p>
+      </div>
+    </div>
+
+    <% } %> <% } %>
   </div>
 </body>
