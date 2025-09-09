@@ -26,7 +26,7 @@ const listingsRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const mongoUrl = myObject.ATLUSURL;
+const mongoUrl = process.env.ATLUSURL;
 const secret = myObject.SECRET;
 const port = myObject.PORT;
 // MongoDB connection
