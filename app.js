@@ -27,7 +27,7 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
 const mongoUrl = process.env.ATLUSURL;
-const secret = myObject.SECRET;
+const secret = process.env.SECRET;
 const port = myObject.PORT;
 // MongoDB connection
 async function main() {
