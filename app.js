@@ -1,5 +1,11 @@
-if (process.env.NODE_ENV != "production") {
-  require("dotenv").config();
+const myObject = {};
+if (myObject.NODE_ENV != "production") {
+  require("dotenv").config({
+    path: ".env",
+    override: true,
+    quiet: true,
+    processEnv: myObject,
+  });
 }
 
 const express = require("express");
@@ -20,9 +26,9 @@ const listingsRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const mongoUrl = process.env.ATLUSURL;
-const secret = process.env.SECRET;
-const port = process.env.PORT;
+const mongoUrl = myObject.ATLUSURL;
+const secret = myObject.SECRET;
+const port = myObject.PORT;
 // MongoDB connection
 async function main() {
   await mongoose.connect(mongoUrl);
